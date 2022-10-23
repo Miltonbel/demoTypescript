@@ -28,4 +28,23 @@ function mostrarEstadisticas(aprendiz: Aprendiz): void {
     
 }
 mostrarEstadisticas(aprendiz);
+
+let cursosTable: HTMLElement = document.getElementById("cursos")!;
+
+function mostarCursosAprendiz(aprendiz:Aprendiz): void {
+    let cursosTBody: HTMLElement = document.createElement("tbody");
+    for(let curso of aprendiz.cusros){
+        let trElement: HTMLElement = document.createElement("tr");
+        trElement.innerHTML = ` <td>${curso.nombre}</td>
+        <td>${curso.horas}</td>
+        <td>${curso.calificacion}</td>
+        <td>${curso.certificado}</td>
+        <td>${curso.anio}</td>
+        
+        `;
+        cursosTBody.appendChild(trElement);
+    }
+    cursosTable.appendChild(cursosTBody);
+}
+mostarCursosAprendiz(aprendiz);
 }

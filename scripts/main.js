@@ -18,4 +18,16 @@ function mostrarDatosApendiz(aprendiz) {
         estadisticasTable.appendChild(trElement);
     }
     mostrarEstadisticas(aprendiz);
+    var cursosTable = document.getElementById("cursos");
+    function mostarCursosAprendiz(aprendiz) {
+        var cursosTBody = document.createElement("tbody");
+        for (var _i = 0, _a = aprendiz.cusros; _i < _a.length; _i++) {
+            var curso = _a[_i];
+            var trElement = document.createElement("tr");
+            trElement.innerHTML = " <td>" + curso.nombre + "</td>\n        <td>" + curso.horas + "</td>\n        <td>" + curso.calificacion + "</td>\n        <td>" + curso.certificado + "</td>\n        <td>" + curso.anio + "</td>\n        \n        ";
+            cursosTBody.appendChild(trElement);
+        }
+        cursosTable.appendChild(cursosTBody);
+    }
+    mostarCursosAprendiz(aprendiz);
 }
