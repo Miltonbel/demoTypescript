@@ -33,14 +33,16 @@ let cursosTable: HTMLElement = document.getElementById("cursos")!;
 
 function mostarCursosAprendiz(cursos:Curso[]): void {
     let cursosTBody: HTMLElement = document.createElement("tbody");
+    let estado : string[] = cusrsos.map(c=> (c.calificacion>60?'green':'red'));
+    let index: number = 0;
     for(let curso of cursos){
         let trElement: HTMLElement = document.createElement("tr");
         trElement.innerHTML = ` <td>${curso.nombre}</td>
         <td>${curso.horas}</td>
-        <td>${curso.calificacion}</td>
+        <td style="color:${estado[index]}">${curso.calificacion}</td>
         <td>${curso.certificado}</td>
         <td>${curso.anio}</td>
-        
+        index++;
         `;
         cursosTBody.appendChild(trElement);
     }
