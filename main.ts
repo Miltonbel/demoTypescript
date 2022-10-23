@@ -1,9 +1,13 @@
 import {Aprendiz, NivelEducativo} from './aprendiz.js';
-export const aprendiz = new Aprendiz("Milton","Beltran", "avatar.jpg", 30, NivelEducativo.POSGRADO );
-console.log(aprendiz)
+import { Curso } from './curso.js';
+let cusrsos = [new Curso("Agilismo", 20,90,true,2019),
+new Curso("Web", 20,90,true,2018)]
+export const aprendiz = new Aprendiz("Milton","Beltran", "avatar.jpg", 30, NivelEducativo.POSGRADO, cusrsos);
+console.log(aprendiz.cusros);
 
 let aprendizTable: HTMLElement = document.getElementById("aprendiz")!;
 mostrarDatosApendiz(aprendiz)
+
 function mostrarDatosApendiz(aprendiz: Aprendiz): void{
     let tBodyAprendiz = document.createElement("tbody");
     tBodyAprendiz.innerHTML = ` <tr><td colspan=2> <img src="./${aprendiz.avatar}" height = "100"></tr></td>
@@ -13,4 +17,15 @@ function mostrarDatosApendiz(aprendiz: Aprendiz): void{
     <tr><td>Edad:</td><td>${aprendiz.edad}</td></tr>`
 
     aprendizTable.appendChild(tBodyAprendiz);
+
+let estadisticasTable: HTMLElement = document.getElementById("estadisticas")!;
+
+function mostrarEstadisticas(aprendiz: Aprendiz): void {
+    let numeroCertificados: number = aprendiz.darCursosCertificados();
+    let trElement:HTMLElement = document.createElement("tr");
+    trElement.innerHTML = `<td><b>Cursos certificados</b></td></td>${numeroCertificados}</td>`;
+    estadisticasTable.appendChild(trElement);
+    
+}
+mostrarEstadisticas(aprendiz);
 }
