@@ -19,15 +19,24 @@ function mostrarDatosApendiz(aprendiz) {
     }
     mostrarEstadisticas(aprendiz);
     var cursosTable = document.getElementById("cursos");
-    function mostarCursosAprendiz(aprendiz) {
+    function mostarCursosAprendiz(cursos) {
         var cursosTBody = document.createElement("tbody");
-        for (var _i = 0, _a = aprendiz.cusros; _i < _a.length; _i++) {
-            var curso = _a[_i];
+        for (var _i = 0, cursos_1 = cursos; _i < cursos_1.length; _i++) {
+            var curso = cursos_1[_i];
             var trElement = document.createElement("tr");
             trElement.innerHTML = " <td>" + curso.nombre + "</td>\n        <td>" + curso.horas + "</td>\n        <td>" + curso.calificacion + "</td>\n        <td>" + curso.certificado + "</td>\n        <td>" + curso.anio + "</td>\n        \n        ";
             cursosTBody.appendChild(trElement);
         }
         cursosTable.appendChild(cursosTBody);
     }
-    mostarCursosAprendiz(aprendiz);
+    mostarCursosAprendiz(aprendiz.cusros);
+    var btnFiltro = document.getElementById("boton-filtro");
+    var textoBusqueda = document.getElementById("texto-busqueda");
+    btnFiltro.onclick = function () {
+        var text = textoBusqueda.value;
+        text = (text == null) ? "" : text;
+        cursosTable.getElementsByTagName("tbody")[0].remove();
+        var cursosFiltrados = aprendiz.cusros.filter(function (c) { return c.nombre.match(text); });
+        mostarCursosAprendiz(cursosFiltrados);
+    };
 }

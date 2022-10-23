@@ -31,9 +31,9 @@ mostrarEstadisticas(aprendiz);
 
 let cursosTable: HTMLElement = document.getElementById("cursos")!;
 
-function mostarCursosAprendiz(aprendiz:Aprendiz): void {
+function mostarCursosAprendiz(cursos:Curso[]): void {
     let cursosTBody: HTMLElement = document.createElement("tbody");
-    for(let curso of aprendiz.cusros){
+    for(let curso of cursos){
         let trElement: HTMLElement = document.createElement("tr");
         trElement.innerHTML = ` <td>${curso.nombre}</td>
         <td>${curso.horas}</td>
@@ -46,5 +46,16 @@ function mostarCursosAprendiz(aprendiz:Aprendiz): void {
     }
     cursosTable.appendChild(cursosTBody);
 }
-mostarCursosAprendiz(aprendiz);
+mostarCursosAprendiz(aprendiz.cusros);
+
+let btnFiltro: HTMLElement = document.getElementById("boton-filtro")!;
+let textoBusqueda: HTMLInputElement = <HTMLInputElement>document.getElementById("texto-busqueda")!;
+btnFiltro.onclick = () => {
+    let text: string = textoBusqueda.value;
+    text = (text==null)? "": text;
+    cursosTable.getElementsByTagName("tbody")[0].remove();
+    let cursosFiltrados: Curso[] = aprendiz.cusros.filter(c => c.nombre.match(text));
+    mostarCursosAprendiz(cursosFiltrados);
+}
+
 }
